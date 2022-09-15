@@ -25,7 +25,10 @@ pipeline {
 			echo "Executed Sucessfully"
 		}
 		failure{
-			echo "Failed	"
+			echo "Failed"
+		}
+		changed{
+			echo "Status of build changed"
 		}
 	}
 }
