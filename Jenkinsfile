@@ -3,7 +3,7 @@ pipeline {
 	stages{
 	  	stage('Build') {
 			steps{	
-				sh "mvn --version"		
+				sh 'mvn --version'		
 		  		echo "Build"
 	    	}
 	  	}
@@ -26,7 +26,7 @@ pipeline {
 			echo "Executed Sucessfully"
 		}
 		failure{
-			echo "Failed"
+			echo "Script Failed"
 		}
 		changed{
 			echo "Status of build changed"
