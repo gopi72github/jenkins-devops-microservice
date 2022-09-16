@@ -28,11 +28,35 @@ pipeline {
 		    	sh "mvn test"
 	    	}
 	  	}
-	  	stage('Integration Test') {
+	  	stage('Package') {
+			steps{			
+		  		sh "mvn package -DskipTests"
+	   		}
+	  	}
+
+		stage('Integration Test') {
 			steps{			
 		  		sh "mvn failsafe:integration-test failsafe:verify"
 	   		}
 	  	}
+
+		stage('Build Docker Image') {
+			steps{			
+		  		script{
+					dockerImage = docker.build("gopinathc/hello-world-java:$env.BUILD_TAG")
+				}
+	   		}
+	  	}
+		stage('Push Docker Image') {
+			steps{			
+		  		script{
+					docker.withRegistry('', 'dockerhub'){
+					dockerImage.push();
+					dockerImage.push(latest);
+					}
+				}
+	   		}
+		}
 	} 
 	post{
 		always{
