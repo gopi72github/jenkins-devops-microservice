@@ -12,6 +12,10 @@ pipeline {
 		  		echo "Build"
 				echo "PATH - $PATH"
 				echo "JOB_NAME - $env.JOB_NAME"
+				echo "BUILD_NUMBER - $env.NUMBER"
+				echo "BUILD_ID - $env.BUILD_ID"
+				echo "BUILD_TAG - $env.BUILD_TAG"
+				echo "BUILD_URL - $env.BUILD_URL"
 	    	}
 	  	}
 	  	stage('Test') {
